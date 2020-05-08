@@ -1,0 +1,39 @@
+@import '../../../../styles/mixins';
+
+.courses-background {
+  width: auto;
+  background-position: center;
+  background-size: auto;
+  background-image: url('../../../../assets/images/courses/courses.jpg');
+  .courses-container {
+    @include flex-jse-ac();
+    margin: 70px 50px 0 50px;
+    height: calc(100vh - 140px);
+    width: calc(100% - 100px);
+    mat-card {
+      // height: 216px;
+      width: 250px;
+      transition: transform .1s;
+      mat-card-header {
+        @include flex-jc-ac();
+        width: 100%;
+        color: #ff982e;
+      }
+        
+      img {
+        min-height: 200px;
+        max-height: 200px;
+      }
+      mat-card-actions {
+        height: 100px;
+      }
+    }
+  }
+}
+
+mat-card:hover {
+  cursor: pointer;
+  background-color: #d9d9d9;
+  transform: scale(1.01);
+}
+  
