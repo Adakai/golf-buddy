@@ -23,17 +23,34 @@
       img {
         min-height: 200px;
         max-height: 200px;
+        margin: 0 -16 0 -16;
       }
       mat-card-actions {
-        height: 100px;
+        height: 100%;
+        padding: 10px;
+        .address {
+          text-align: center;
+          font-size: 18px;
+          color: #ff982e;
+        }
+        mat-form-field {
+          @include flex-jc-ac();
+          margin-top: 20px;
+        }
       }
     }
   }
 }
 
-mat-card:hover {
+img:hover {
   cursor: pointer;
+}
+
+mat-card:hover {
   background-color: #d9d9d9;
   transform: scale(1.01);
 }
-  
+
+.mat-select-arrow {
+  color: #ff982e;
+}

@@ -12,7 +12,14 @@ export class CoursesComponent implements OnInit {
   courses: Courses[];
   selectedCourse: Course;
   selected: boolean = false;
+  teeType: any[];
   id: number;
+  players: any[] = [
+    { value: '1-player-0', viewValue: '1 player' },
+    { value: '2-players-1', viewValue: '2 players' },
+    { value: '3-players-2', viewValue: '3 players' },
+    { value: '4-players-3', viewValue: '4 players' }
+  ]
 
   constructor(
     private golfApiService: GolfApiService
@@ -29,7 +36,8 @@ export class CoursesComponent implements OnInit {
     this.id = id;
     this.golfApiService.getCourse(id).subscribe(data => {
       this.selectedCourse = data.data;
-      console.log(this.selectedCourse);
+      this.teeType = this.selectedCourse.holes[0].teeBoxes;
+      console.log(this.teeType);
     })
   }
 

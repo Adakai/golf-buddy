@@ -1,0 +1,100 @@
+:ng-deep .mat-focused .mat-form-field-label {
+  color: #ff982e !important;
+}
+::ng-deep.mat-form-field-underline {
+  background-color: #ff982e !important;
+} 
+::ng-deep.mat-form-field-ripple {
+background-color: #ff982e !important;;
+}
+
+// mat-icon-stepper selected color change 
+::ng-deep .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
+  background-color: #ff982e!important;
+}
+
+//input outline color
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #ff982e!important;
+  // opacity: 1!important;
+}
+
+//mat-input focused color
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: #ff982e!important;
+}
+
+// mat-input error outline color
+::ng-deep .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick{
+  color: #ff982e!important;
+  opacity: 0.8!important;
+}
+
+// mat-input carent color
+::ng-deep .mat-input-element {
+  caret-color: #ff982e!important;
+}
+
+// mat-input error carent color
+::ng-deep .mat-form-field-invalid .mat-input-element, .mat-warn .mat-input-element {
+  caret-color: #ff982e!important;
+}
+
+// mat-label normal state style
+::ng-deep .mat-form-field-label {
+  color: #ff982e!important;
+  // color: $mainColor!important;
+}
+
+// mat-label focused style
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+  color: #ff982e!important;
+}
+
+// mat-label error style
+::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label {
+  color: #ff982e!important;
+}
+
+// arrow
+::ng-deep .mat-select-arrow {
+  border-left: 15px solid transparent !important;
+  border-right: none !important;
+  border-top: 15px solid transparent !important;
+  //border-image-source: url('my img url') !important;
+  border-image-repeat: stretch !important;
+}
+
+// ::ng-deep .mat-tab-label {
+//   width: 33.3%;
+//   height: 55px !important;
+// }
+
+// ::ng-deep .mat-ink-bar {
+//   background-color: #ff982e;
+// }
+
+// /*** To change the arrow color ****/
+// ::ng-deep .mat-select-arrow {
+// color: #ff982e;
+// }
+
+/* to change arrow when focused */
+::ng-deep .mat-select:focus:not(.mat-select-disabled).mat-primary .mat-select-arrow {
+  color: #ff982e;
+}
+
+/* to change underline when focused */
+::ng-deep .mat-select:focus:not(.mat-select-disabled).mat-primary .mat-select-underline {
+  background-color: #ff982e;
+}
+
+/* to change plceholder text when focused */
+::ng-deep .mat-select:focus:not(.mat-select-disabled).mat-primary .mat-select-trigger {
+  color: #ff982e;
+}
+
+/* to change selected item color in the select list */
+::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+  color: #ff982e;
+}

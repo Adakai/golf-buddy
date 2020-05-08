@@ -1,13 +1,30 @@
 <div class="courses-background">
   <div class="courses-container">
-    <mat-card *ngFor="let course of courses" (click)="cardSelected(course.id)" class="example-card">
+    <mat-card *ngFor="let course of courses" class="example-card">
       <mat-card-header>
         <mat-card-title>{{ course.name }}</mat-card-title>
       </mat-card-header>
-      <img mat-card-image src="{{ course.image }}" alt="{{ course.image }}">
-      
+      <img (click)="cardSelected(course.id)" mat-card-image src="{{ course.image }}" alt="{{ course.image }}">
+
       <mat-card-actions *ngIf="selected && course.id === id">
-        
+        <div class="address">{{ selectedCourse?.addr1 }} {{ selectedCourse?.city }},
+          {{ selectedCourse?.stateOrProvince }}</div>
+        <mat-form-field>
+          <mat-label>Tee Type</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let tee of teeType | slice:0:4; let i=index" [value]="tee.teeType">
+              {{ tee.teeType }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Number of Players</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let player of players" [value]="player.value">
+              {{ player.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </mat-card-actions>
     </mat-card>
   </div>
