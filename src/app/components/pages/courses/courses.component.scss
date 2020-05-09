@@ -35,7 +35,16 @@
         }
         mat-form-field {
           @include flex-jc-ac();
-          margin-top: 20px;
+          //margin-top: 20px;
+        }
+        .get-course {
+          @include flex-jc-ac();
+          width: 100%;
+          button {
+            margin: 20px 0 20px 0;
+            background-color: #ff982e;
+            color: #fff;
+          }
         }
       }
     }

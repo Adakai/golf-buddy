@@ -7,12 +7,12 @@
       <img (click)="cardSelected(course.id)" mat-card-image src="{{ course.image }}" alt="{{ course.image }}">
 
       <mat-card-actions *ngIf="selected && course.id === id">
-        <div class="address">{{ selectedCourse?.addr1 }} {{ selectedCourse?.city }},
-          {{ selectedCourse?.stateOrProvince }}</div>
+        <!-- <div class="address">{{ selectedCourse?.addr1 }} {{ selectedCourse?.city }},
+          {{ selectedCourse?.stateOrProvince }}</div> -->
         <mat-form-field>
           <mat-label>Tee Type</mat-label>
           <mat-select>
-            <mat-option *ngFor="let tee of teeType | slice:0:4; let i=index" [value]="tee.teeType">
+            <mat-option (click)="setTeeType(tee.teeType)" *ngFor="let tee of teeType | slice:0:4; let i=index" [value]="tee.teeType">
               {{ tee.teeType }}
             </mat-option>
           </mat-select>
@@ -20,11 +20,14 @@
         <mat-form-field>
           <mat-label>Number of Players</mat-label>
           <mat-select>
-            <mat-option *ngFor="let player of players" [value]="player.value">
+            <mat-option (click)="setPlayers(player.value)" *ngFor="let player of players" [value]="player.value">
               {{ player.viewValue }}
             </mat-option>
           </mat-select>
         </mat-form-field>
+        <div class="get-course">
+          <button (click)="setSelected()" mat-raised-button routerLink="/course/{{ course.id }}">Get Course</button>
+        </div>
       </mat-card-actions>
     </mat-card>
   </div>

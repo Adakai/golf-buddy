@@ -79,6 +79,7 @@
   .lower {
     @include flex-jc-ac();
     height: 400px;
+    border-top: 4px solid #ff982e;
     background-color: #fff;
     .left {
       height: 100%;

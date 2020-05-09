@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GolfApiService } from 'src/app/shared/services/golf-api.service';
 import { Courses } from 'src/app/models/courses';
 import { Course } from 'src/app/models/course';
+import { ScoreCardService } from 'src/app/shared/services/score-card.service';
 
 @Component({
   selector: 'app-courses',
@@ -9,20 +10,24 @@ import { Course } from 'src/app/models/course';
   styleUrls: ['./courses.component.scss']
 })
 export class CoursesComponent implements OnInit {
+
   courses: Courses[];
   selectedCourse: Course;
   selected: boolean = false;
   teeType: any[];
   id: number;
+  selectedPlayer: number;
+  selectedTeeType: string;
   players: any[] = [
-    { value: '1-player-0', viewValue: '1 player' },
-    { value: '2-players-1', viewValue: '2 players' },
-    { value: '3-players-2', viewValue: '3 players' },
-    { value: '4-players-3', viewValue: '4 players' }
+    { value: 1, viewValue: '1 player' },
+    { value: 2, viewValue: '2 players' },
+    { value: 3, viewValue: '3 players' },
+    { value: 4, viewValue: '4 players' }
   ]
 
   constructor(
-    private golfApiService: GolfApiService
+    private golfApiService: GolfApiService,
+    private scoreCardService: ScoreCardService
   ) { }
 
   ngOnInit(): void {
@@ -41,4 +46,15 @@ export class CoursesComponent implements OnInit {
     })
   }
 
+  setPlayers(player: number) {
+    this.selectedPlayer = player;
+  }
+
+  setTeeType(teeType: string) {
+    this.selectedTeeType = teeType;
+  }
+
+  setSelected() {
+    this.scoreCardService.setSelected(this.selectedPlayer, this.selectedTeeType);
+  }
 }
