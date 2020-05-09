@@ -17,8 +17,19 @@
           </div>
         </div>
       </div>
-      <div class="score-card">
-
+      <div class="score-card-content">
+        <div class="score-card">
+          <div class="set-information">
+            <div>Holes</div>
+            <div>Yards</div>
+            <div>Par</div>
+          </div>
+          <div *ngFor="let hole of holes" class="columns">
+            <div>{{ hole?.hole }}</div>
+            <div>{{ hole?.teeBoxes[selectedTeeNumber].yards }}</div>
+            <div>{{ hole?.teeBoxes[selectedTeeNumber].par }}</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
