@@ -3,6 +3,7 @@ import { GolfApiService } from 'src/app/shared/services/golf-api.service';
 import { Courses } from 'src/app/models/courses';
 import { Course } from 'src/app/models/course';
 import { ScoreCardService } from 'src/app/shared/services/score-card.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-courses',
@@ -27,10 +28,15 @@ export class CoursesComponent implements OnInit {
 
   constructor(
     private golfApiService: GolfApiService,
-    private scoreCardService: ScoreCardService
+    private scoreCardService: ScoreCardService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
+    this.getCourses();
+  }
+
+  getCourses() {
     this.golfApiService.getCourses().subscribe(data => {
       this.courses = data.courses;
     })
@@ -54,7 +60,13 @@ export class CoursesComponent implements OnInit {
     this.selectedTeeType = teeType;
   }
 
-  setSelected() {
-    this.scoreCardService.setSelected(this.selectedPlayer, this.selectedTeeType);
+  setSelected(id: number) {
+    if(this.selectedPlayer && this.selectedTeeType) {
+      this.scoreCardService.setSelected(this.selectedPlayer, this.selectedTeeType);
+      this.router.navigate([`course/${id}`]);
+    } else {
+      return;
+    }
   }
 }
+

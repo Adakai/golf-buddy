@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ScoreCardService } from 'src/app/shared/services/score-card.service';
 import { ActivatedRoute } from '@angular/router';
 import { GolfApiService } from 'src/app/shared/services/golf-api.service';
+import { Course } from 'src/app/models/course';
 
 @Component({
   selector: 'app-course',
@@ -11,6 +12,7 @@ import { GolfApiService } from 'src/app/shared/services/golf-api.service';
 export class CourseComponent implements OnInit {
   selectedPlayer: number;
   selectedTeeType: string;
+  currentCourse: Course;
   id: number;
 
   constructor(
@@ -20,6 +22,11 @@ export class CourseComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.setValues();
+    this.getCourse();
+  }
+
+  setValues() {
     this.id = this.activateRoute.snapshot.params["id"];
     this.selectedTeeType = this.scoreCardService.selectedTeeType;
     this.selectedPlayer = this.scoreCardService.selectedPlayer;
@@ -27,7 +34,8 @@ export class CourseComponent implements OnInit {
 
   getCourse() {
     this.golfApiService.getCourse(this.id).subscribe(data => {
-      console.log(data.data)
+      this.currentCourse = data.data
+      console.log(this.currentCourse);
     })
   }
 }

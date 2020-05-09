@@ -26,7 +26,7 @@
           </mat-select>
         </mat-form-field>
         <div class="get-course">
-          <button (click)="setSelected()" mat-raised-button routerLink="/course/{{ course.id }}">Get Course</button>
+          <button (click)="setSelected(course.id)" mat-raised-button>Get Course</button>
         </div>
       </mat-card-actions>
     </mat-card>

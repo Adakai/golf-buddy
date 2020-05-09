@@ -1,1 +1,25 @@
-<p>course works!</p>
+<div class="course-background">
+  <div class="course-container">
+    <div class="score-card-container">
+      <div class="score-card-header">
+        <div class="course-img">
+          <img src="{{ currentCourse?.thumbnail }}" alt="">
+        </div>
+        <div class="course-title">
+          <h1>{{ currentCourse?.name }}</h1>
+        </div>
+        <div class="course-information">
+          <div class="address">{{ currentCourse?.addr1 }} {{ currentCourse?.city }},
+            {{ currentCourse?.stateOrProvince }}</div>
+          <div class="phone">{{ currentCourse?.phone }}</div>
+          <div class="website">
+            <button mat-raised-button><a href="{{ currentCourse?.website }}" target="_blank">Visit Website</a></button>
+          </div>
+        </div>
+      </div>
+      <div class="score-card">
+
+      </div>
+    </div>
+  </div>
+</div>

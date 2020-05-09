@@ -1,0 +1,75 @@
+@import '../../../../styles/mixins';
+
+.course-background {
+  width: auto;
+  background-position: center;
+  background-size: auto;
+  background-image: url('../../../../assets/images/courses/courses.jpg');
+  .course-container {
+    @include flex-jse-ac();
+    margin: 70px 50px 0 50px;
+    height: calc(100vh - 140px);
+    width: calc(100% - 100px);
+    .score-card-container {
+      @include box-shadow();
+      height: 700px;
+      width: 95%;
+      background-color: #fff;
+      border-radius: 4px;
+      .score-card-header {
+        @include flex-jc-ac();
+        height: 30%;
+        .course-img {
+          @include flex-jc-ac();
+          height: 100%;
+          width: 30%;
+          background-color: #ff982e;
+          border-radius: 4px 0 0 0;
+          img {
+            height: calc(100% - 20px);
+            width: calc(100% - 20px);
+            max-width: 340px;
+            border-radius: 4px;
+          }
+        }
+        .course-title {
+          @include flex-jc-ac();
+          height: 100%;
+          width: 40%;
+          margin-top: 4px;
+          border-top: 4px solid #ff982e;
+          h1 {
+            width: 100%;
+            margin: 0;
+            line-height: 50px;
+            text-align: center;
+            font-size: 40px;
+            color: #ff982e;
+          }
+        }
+        .course-information {
+          @include flex-jse-ac-fdc();
+          height: 100%;
+          width: 30%;
+          font-size: 16px;
+          color: #fff;
+          background-color: #ff982e;
+          border-radius: 0 4px 0 0;
+          .website {
+            button {
+              background-color: #fff;
+              a {
+                color: #ff982e;
+                text-decoration: none;
+              }
+            }
+          }
+        }
+      }
+      .score-card {
+        height: 70%;
+        border-top: 4px solid #ff982e;
+      }
+    }
+  }
+}
