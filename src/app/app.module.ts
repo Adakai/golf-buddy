@@ -42,7 +42,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatCardModule,
     MatToolbarModule,
     MatNativeDateModule,
-    MatSelectModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

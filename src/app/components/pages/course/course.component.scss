@@ -38,12 +38,14 @@
           width: 40%;
           border-top: 10px solid #ff982e;
           border-bottom: 10px solid #ff982e;
-          background-color: #d6d6d6;
+          // background-color: #d6d6d6;
           h1 {
             width: 100%;
             margin: 0;
             line-height: 50px;
             text-align: center;
+            border-bottom: 4px solid #ff982e;
+            border-top: 4px solid #ff982e;
             font-size: 40px;
             color: #ff982e;
           }
@@ -73,17 +75,55 @@
         height: 70%;
         .score-card {
           @include flex-jc-ac();
-          height: calc(100% - 40px);
-          width: calc(100% - 40px);
+          align-items: flex-start;
+          // height: calc(100% - 40px);
+          // width: calc(100% - 40px);
+          height: 100%;
+          width: 100%;
           border: 2px solid #ff982e;
           border-radius: 4px;
           .set-information {
             width: 10%;
-            margin-left: 10px;
+            text-align: center;
+            div {
+              @include flex-jc-ac();
+              height: 25px;
+              border: 2px solid #ff982e;
+              border-radius: 4px;
+              margin: 5px;
+              background-color: #ff982e;
+              color: #fff;
+            }
           }
           .columns {
             width: 5%;
             text-align: center;
+            div {
+              @include flex-jc-ac();
+              height: 25px;
+              border: 2px solid #ff982e;
+              border-radius: 4px;
+              margin: 5px;
+              color: #ff982e;
+            }
+          }
+          .totals {
+            display: flex;
+            width: 15%;
+            div {
+              @include flex-jc-ac();
+              height: 25px;
+              width: 30%;
+              text-align: center;
+              border: 2px solid #ff982e;
+              border-radius: 4px;
+              margin: 5px;
+              background-color: #ff982e;
+              color: #fff;
+            }
+            div:nth-child(1) {
+              width: 40%;
+            }
           }
         }
       }

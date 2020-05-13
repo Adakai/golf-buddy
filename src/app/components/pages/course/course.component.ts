@@ -14,7 +14,6 @@ export class CourseComponent implements OnInit {
   selectedTeeType: string;
   selectedTeeNumber: number;
   holes: any[];
-  yards: number[] = [];
   pars: number[] = [];
   currentCourse: Course;
   id: number;
@@ -26,14 +25,20 @@ export class CourseComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getLocalStorage();
     this.setValues();
     this.getCourse();
+    console.log(this.currentCourse);
   }
 
   setValues() {
     this.id = this.activateRoute.snapshot.params["id"];
-    this.selectedTeeType = this.scoreCardService.selectedTeeType;
-    this.selectedPlayer = this.scoreCardService.selectedPlayer;
+    if(this.scoreCardService.selectedTeeType !== undefined) {
+      this.selectedTeeType = this.scoreCardService.selectedTeeType;
+    }
+    if (this.scoreCardService.selectedPlayer !== undefined) {
+      this.selectedPlayer = this.scoreCardService.selectedPlayer;
+    }
   }
 
   setTeeType() {
@@ -53,21 +58,31 @@ export class CourseComponent implements OnInit {
     }
   }
 
-  // setParsYards() {
-  //   for (let i = 0; i < this.holes.length; i++) {
-  //     this.yards.push(this.holes[i].teeBoxes[this.selectedTeeNumber].yards);
-  //     this.pars.push(this.holes[i].teeBoxes[this.selectedTeeNumber].par);
-  //   }
-  // }
-
   getCourse() {
     this.golfApiService.getCourse(this.id).subscribe(data => {
       this.currentCourse = data.data
       this.holes = this.currentCourse?.holes;
-      console.log(this.holes);
-      console.log(this.currentCourse);
       this.setTeeType();
-      // this.setParsYards();
+      this.setLocalStorage();
     })
+  };
+
+  getLocalStorage() {
+    if(localStorage.getItem('currentCourse') === null)  {
+        this.currentCourse = null;
+    } else {
+      this.currentCourse = JSON.parse(localStorage.getItem('currentCourse'));
+      this.selectedTeeType = JSON.parse(localStorage.getItem('selectedTeeType'));
+      this.selectedPlayer = JSON.parse(localStorage.getItem('selectedPlayer'));
+      this.holes = this.currentCourse?.holes;
+      this.setTeeType();
+      console.log(this.holes);
+    }
+  }
+
+  setLocalStorage() {
+    localStorage.setItem('currentCourse', JSON.stringify(this.currentCourse));
+    localStorage.setItem('selectedTeeType', JSON.stringify(this.selectedTeeType));
+    localStorage.setItem('selectedPlayer', JSON.stringify(this.selectedPlayer));
   }
 }

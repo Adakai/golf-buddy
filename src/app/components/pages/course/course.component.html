@@ -23,11 +23,18 @@
             <div>Holes</div>
             <div>Yards</div>
             <div>Par</div>
+            <div>Handicap</div>
           </div>
           <div *ngFor="let hole of holes" class="columns">
             <div>{{ hole?.hole }}</div>
             <div>{{ hole?.teeBoxes[selectedTeeNumber].yards }}</div>
             <div>{{ hole?.teeBoxes[selectedTeeNumber].par }}</div>
+            <div>{{ hole?.teeBoxes[selectedTeeNumber].hcp }}</div>
+          </div>
+          <div class="totals">
+            <div>Total</div>
+            <div>Out</div>
+            <div>In</div>
           </div>
         </div>
       </div>

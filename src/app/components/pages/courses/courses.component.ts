@@ -65,6 +65,7 @@ export class CoursesComponent implements OnInit {
       this.scoreCardService.setSelected(this.selectedPlayer, this.selectedTeeType);
       this.router.navigate([`course/${id}`]);
     } else {
+      
       return;
     }
   }
