@@ -48,7 +48,7 @@ export class CoursesComponent implements OnInit {
     this.golfApiService.getCourse(id).subscribe(data => {
       this.selectedCourse = data.data;
       this.teeType = this.selectedCourse.holes[0].teeBoxes;
-      console.log(this.teeType);
+      // console.log(this.teeType);
     })
   }
 

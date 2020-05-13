@@ -10,14 +10,18 @@ import { Course } from 'src/app/models/course';
   styleUrls: ['./course.component.scss']
 })
 export class CourseComponent implements OnInit {
+  id: number;
+  currentCourse: Course;
   selectedPlayer: number;
   selectedTeeType: string;
   selectedTeeNumber: number;
   playerCollection: string[] = [];
   holes: any[];
   pars: number[] = [];
-  currentCourse: Course;
-  id: number;
+  totalHoles: number = 0;
+  totalYards: number = 0;
+  totalPars: number = 0;
+  totalHandicaps: number = 0;
 
   constructor(
     private activateRoute: ActivatedRoute,
@@ -29,7 +33,6 @@ export class CourseComponent implements OnInit {
     this.getLocalStorage();
     this.setValues();
     this.getCourse();
-    console.log(this.currentCourse);
   }
 
   setValues() {
@@ -57,6 +60,10 @@ export class CourseComponent implements OnInit {
         this.selectedTeeNumber = 3;
         break;
     }
+
+    if(this.holes[0].teeBoxes[0].teeType != 'pro') {
+      this.selectedTeeNumber = this.selectedTeeNumber - 1;
+    }
   }
 
   getCourse() {
@@ -66,15 +73,28 @@ export class CourseComponent implements OnInit {
       this.setTeeType();
       this.setLocalStorage();
       this.setPlayers();
+      this.setTotals();
     })
   };
 
   setPlayers() {
-    console.log(this.selectedPlayer)
     for (let i = 0; i < this.selectedPlayer; i++) {
       this.playerCollection.push(`player ${i}`)
     }
-    console.log(this.playerCollection);
+    // console.log(this.playerCollection);
+    console.log(this.currentCourse.holes[0].teeBoxes[this.selectedTeeNumber].teeType + ' current course');
+    console.log(this.selectedPlayer + ' current players');
+  }
+
+  setTotals() {
+    // console.log(this.currentCourse.holes[0].teeBoxes[this.selectedTeeNumber].hcp);
+    for(let i = 0; i < this.currentCourse.holes.length; i++) {
+      this.totalHoles = i + 1;
+      this.totalYards += this.currentCourse.holes[i].teeBoxes[this.selectedTeeNumber].yards;
+      this.totalPars += this.currentCourse.holes[i].teeBoxes[this.selectedTeeNumber].par;
+      this.totalHandicaps += this.currentCourse.holes[i].teeBoxes[this.selectedTeeNumber].hcp;
+      console.log(this.totalPars);
+    }
   }
 
   getLocalStorage() {
@@ -85,8 +105,9 @@ export class CourseComponent implements OnInit {
       this.selectedTeeType = JSON.parse(localStorage.getItem('selectedTeeType'));
       this.selectedPlayer = JSON.parse(localStorage.getItem('selectedPlayer'));
       this.holes = this.currentCourse?.holes;
+      console.log(this.holes)
       this.setTeeType();
-      console.log(this.holes);
+      // this.setTotals();
     }
   }
 
@@ -96,3 +117,6 @@ export class CourseComponent implements OnInit {
     localStorage.setItem('selectedPlayer', JSON.stringify(this.selectedPlayer));
   }
 }
+
+
+// turn players in to object, more easily to handle scores and in and out

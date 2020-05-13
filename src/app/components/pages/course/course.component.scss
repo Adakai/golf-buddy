@@ -1,10 +1,10 @@
-@import '../../../../styles/mixins';
+@import "../../../../styles/mixins";
 
 .course-background {
   width: auto;
   background-position: center;
   background-size: auto;
-  background-image: url('../../../../assets/images/courses/courses.jpg');
+  background-image: url("../../../../assets/images/courses/courses.jpg");
   .course-container {
     @include flex-jse-ac();
     margin: 70px 50px 0 50px;
@@ -59,6 +59,9 @@
           color: #fff;
           background-color: #ff982e;
           border-radius: 0 4px 0 0;
+          .address {
+            text-align: center;
+          }
           .website {
             button {
               background-color: #fff;
@@ -74,8 +77,38 @@
         @include flex-jc-ac-fdc();
         justify-content: flex-start;
         // height: 70%;
-        border: 2px solid #ff982e;
+        border: 4px solid #ff982e;
         border-radius: 0 0 4px 4px;
+        .score-card-title {
+          @include flex-jse-ac();
+          width: 87%;
+          text-align: center;
+          color: #ff982e;
+          h2 {
+            margin: 0px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            font-size: 25px;
+          }
+        }
+        .total-titles-container {
+          @include flex-jc-ac();
+          justify-content: flex-end;
+          width: 100%;
+          margin-top: 20px;
+          .total-titles {
+            @include flex-jse-ac();
+            width: 13%;
+            div {
+              width: 30%;
+              text-align: center;
+              color: #ff982e;
+            }
+            div:nth-child(1) {
+              width: 40%;
+            }
+          }
+        }
         .score-card-top {
           @include flex-jc-ac();
           align-items: flex-start;
@@ -84,7 +117,7 @@
           height: 100%;
           width: 100%;
           padding-top: 20px;
-          padding-bottom: 20px;
+          padding-bottom: 10px;
           // border: 2px solid #ff982e;
           // border-radius: 0 0 4px 4px;
           .set-information {
@@ -113,11 +146,63 @@
             }
           }
           .totals {
+            width: 15%;
+            .total-col {
+              // @include flex-jc-ac();
+              width: 40%;
+              div {
+                @include flex-jc-ac();
+                height: 25px;
+                text-align: center;
+                border: 2px solid #ff982e;
+                border-radius: 4px;
+                margin: 5px;
+                background-color: #ff982e;
+                color: #fff;
+              }
+            }
+          }
+        }
+        .score-card-bottom {
+          @include flex-jc-ac();
+          align-items: flex-start;
+          height: 100%;
+          width: 100%;
+          padding-bottom: 20px;
+          .players {
+            width: 10%;
+            text-align: center;
+            .player {
+              @include flex-jc-ac-fdc();
+              margin: 5px;
+              height: 35px;
+              border: 2px solid #ff982e;
+              border-radius: 4px;
+              background-color: #ff982e;
+              color: #fff;
+              div {
+                @include flex-jc-ac();
+              }
+            }
+          }
+          .columns {
+            width: 5%;
+            text-align: center;
+            div {
+              @include flex-jc-ac();
+              height: 35px;
+              border: 2px solid #ff982e;
+              border-radius: 4px;
+              margin: 5px;
+              color: #ff982e;
+            }
+          }
+          .total {
             display: flex;
             width: 15%;
             div {
               @include flex-jc-ac();
-              height: 25px;
+              height: 35px;
               width: 30%;
               text-align: center;
               border: 2px solid #ff982e;
