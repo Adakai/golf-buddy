@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="score-card-content">
-        <div class="score-card">
+        <div class="score-card-top">
           <div class="set-information">
             <div>Holes</div>
             <div>Yards</div>
@@ -35,6 +35,11 @@
             <div>Total</div>
             <div>Out</div>
             <div>In</div>
+          </div>
+        </div>
+        <div class="score-card-bottom">
+          <div *ngFor="let player of playerCollection" class="players">
+            <div>{{ player }}</div>
           </div>
         </div>
       </div>

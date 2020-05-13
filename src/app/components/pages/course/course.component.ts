@@ -13,6 +13,7 @@ export class CourseComponent implements OnInit {
   selectedPlayer: number;
   selectedTeeType: string;
   selectedTeeNumber: number;
+  playerCollection: string[] = [];
   holes: any[];
   pars: number[] = [];
   currentCourse: Course;
@@ -33,7 +34,7 @@ export class CourseComponent implements OnInit {
 
   setValues() {
     this.id = this.activateRoute.snapshot.params["id"];
-    if(this.scoreCardService.selectedTeeType !== undefined) {
+    if (this.scoreCardService.selectedTeeType !== undefined) {
       this.selectedTeeType = this.scoreCardService.selectedTeeType;
     }
     if (this.scoreCardService.selectedPlayer !== undefined) {
@@ -42,7 +43,7 @@ export class CourseComponent implements OnInit {
   }
 
   setTeeType() {
-    switch(this.selectedTeeType) {
+    switch (this.selectedTeeType) {
       case 'pro':
         this.selectedTeeNumber = 0;
         break;
@@ -64,12 +65,21 @@ export class CourseComponent implements OnInit {
       this.holes = this.currentCourse?.holes;
       this.setTeeType();
       this.setLocalStorage();
+      this.setPlayers();
     })
   };
 
+  setPlayers() {
+    console.log(this.selectedPlayer)
+    for (let i = 0; i < this.selectedPlayer; i++) {
+      this.playerCollection.push(`player ${i}`)
+    }
+    console.log(this.playerCollection);
+  }
+
   getLocalStorage() {
-    if(localStorage.getItem('currentCourse') === null)  {
-        this.currentCourse = null;
+    if (localStorage.getItem('currentCourse') === null) {
+      this.currentCourse = null;
     } else {
       this.currentCourse = JSON.parse(localStorage.getItem('currentCourse'));
       this.selectedTeeType = JSON.parse(localStorage.getItem('selectedTeeType'));
