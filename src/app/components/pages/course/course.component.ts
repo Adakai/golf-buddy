@@ -15,13 +15,14 @@ export class CourseComponent implements OnInit {
   selectedPlayer: number;
   selectedTeeType: string;
   selectedTeeNumber: number;
-  playerCollection: string[] = [];
+  playerCollection: any[] = [];
   holes: any[];
   pars: number[] = [];
   totalHoles: number = 0;
   totalYards: number = 0;
   totalPars: number = 0;
   totalHandicaps: number = 0;
+  changedName: boolean = false;
 
   constructor(
     private activateRoute: ActivatedRoute,
@@ -61,7 +62,7 @@ export class CourseComponent implements OnInit {
         break;
     }
 
-    if(this.holes[0].teeBoxes[0].teeType != 'pro') {
+    if (this.holes[0].teeBoxes[0].teeType != 'pro') {
       this.selectedTeeNumber = this.selectedTeeNumber - 1;
     }
   }
@@ -71,29 +72,34 @@ export class CourseComponent implements OnInit {
       this.currentCourse = data.data
       this.holes = this.currentCourse?.holes;
       this.setTeeType();
-      this.setLocalStorage();
       this.setPlayers();
+      this.setLocalStorage();
       this.setTotals();
     })
   };
 
-  setPlayers() {
-    for (let i = 0; i < this.selectedPlayer; i++) {
-      this.playerCollection.push(`player ${i}`)
+  setPlayers() {  
+    if(this.playerCollection.length === 0) {
+      for (let i = 0; i < this.selectedPlayer; i++) {
+        const holes = [];
+        const player = { name: '', id: 0, holes: holes, totalScore: 0, outScore: 0, inScore: 0, nameChanged: false };
+        for (let i = 0; i < this.holes.length; i++) {
+          let holeScore = { hole: this.holes[i].hole, score: 0 }
+          holes.push(holeScore);
+        };
+        player.id = i;
+        player.name = `player ${i}`;
+        this.playerCollection.push(player)
+      }
     }
-    // console.log(this.playerCollection);
-    console.log(this.currentCourse.holes[0].teeBoxes[this.selectedTeeNumber].teeType + ' current course');
-    console.log(this.selectedPlayer + ' current players');
   }
 
   setTotals() {
-    // console.log(this.currentCourse.holes[0].teeBoxes[this.selectedTeeNumber].hcp);
-    for(let i = 0; i < this.currentCourse.holes.length; i++) {
+    for (let i = 0; i < this.currentCourse.holes.length; i++) {
       this.totalHoles = i + 1;
       this.totalYards += this.currentCourse.holes[i].teeBoxes[this.selectedTeeNumber].yards;
       this.totalPars += this.currentCourse.holes[i].teeBoxes[this.selectedTeeNumber].par;
       this.totalHandicaps += this.currentCourse.holes[i].teeBoxes[this.selectedTeeNumber].hcp;
-      console.log(this.totalPars);
     }
   }
 
@@ -104,19 +110,47 @@ export class CourseComponent implements OnInit {
       this.currentCourse = JSON.parse(localStorage.getItem('currentCourse'));
       this.selectedTeeType = JSON.parse(localStorage.getItem('selectedTeeType'));
       this.selectedPlayer = JSON.parse(localStorage.getItem('selectedPlayer'));
+      this.changedName = JSON.parse(localStorage.getItem('changedName'));
       this.holes = this.currentCourse?.holes;
       console.log(this.holes)
       this.setTeeType();
-      // this.setTotals();
     }
+    if(this.changedName) {
+      this.playerCollection = JSON.parse(localStorage.getItem('playerCollection'));
+    }
+    
   }
 
   setLocalStorage() {
     localStorage.setItem('currentCourse', JSON.stringify(this.currentCourse));
     localStorage.setItem('selectedTeeType', JSON.stringify(this.selectedTeeType));
     localStorage.setItem('selectedPlayer', JSON.stringify(this.selectedPlayer));
+    localStorage.setItem('playerCollection', JSON.stringify(this.playerCollection));
+    localStorage.setItem('changedName', JSON.stringify(this.changedName));
+  }
+
+  clearField(event: any) {
+    event.target.value = '';
+  }
+
+  changeName(event: any, id: number) {
+    console.log(event)
+    console.log(event.target.value + ' event');
+    console.log(id + ' id');
+
+    for (let i = 0; i < this.playerCollection.length; i++) {
+      if (id === this.playerCollection[i].id) {
+        this.playerCollection[i].name = event.target.value;
+      }
+    }
+    this.changedName = true;
+    this.setLocalStorage();
+  }
+
+  setScoreTotal(event: any, id: number, hole: number) {
+    console.log(id, event.target.value, hole);
   }
 }
 
 
-// turn players in to object, more easily to handle scores and in and out
+

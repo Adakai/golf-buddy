@@ -169,7 +169,7 @@
           align-items: flex-start;
           height: 100%;
           width: 100%;
-          padding-bottom: 20px;
+          padding-bottom: 10px;
           .players {
             width: 10%;
             text-align: center;
@@ -184,6 +184,14 @@
               div {
                 @include flex-jc-ac();
               }
+              input {
+                height: 100%;
+                width: 100%;
+                text-align: center;
+                border: 0px;
+                color: #fff;
+                background-color: #ff982e;
+              }
             }
           }
           .columns {
@@ -191,10 +199,15 @@
             text-align: center;
             div {
               @include flex-jc-ac();
-              height: 35px;
+              margin: 5px;
+            }
+            input {
+              width: 70%;
+              height: 33px;
               border: 2px solid #ff982e;
               border-radius: 4px;
-              margin: 5px;
+              margin-top: 5px;
+              text-align: center;
               color: #ff982e;
             }
           }

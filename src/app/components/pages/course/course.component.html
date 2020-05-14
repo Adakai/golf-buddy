@@ -50,20 +50,19 @@
             </div>
           </div>
         </div>
-        <div class="score-card-bottom">
+        <div *ngFor="let player of playerCollection" class="score-card-bottom">
           <div class="players">
-            <div *ngFor="let player of playerCollection" class="player">
-              <div>{{ player }}</div>
+            <div (click)="clearField($event)" class="player">
+              <input type="text" (change)="changeName($event, player.id)" [value]="player.name" />
             </div>
           </div>
-          <div *ngFor="let hole of holes" class="columns">
-            <div>0</div>
-            <div>0</div>
+          <div (click)="clearField($event)" *ngFor="let hole of player.holes" class="columns">
+            <input type="text" (change)="setScoreTotal($event, player.id, hole.hole)" [value]="hole.score"/>
           </div>
           <div class="total">
-            <div>0</div>
-            <div>0</div>
-            <div>0</div>
+            <div>{{ player.totalScore }}</div>
+            <div>{{ player.outScore }}</div>
+            <div>{{ player.inScore }}</div>
           </div>
         </div>
       </div>

@@ -34,6 +34,7 @@ export class CoursesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCourses();
+    localStorage.clear();
   }
 
   getCourses() {
@@ -65,7 +66,7 @@ export class CoursesComponent implements OnInit {
       this.scoreCardService.setSelected(this.selectedPlayer, this.selectedTeeType);
       this.router.navigate([`course/${id}`]);
     } else {
-      
+
       return;
     }
   }
