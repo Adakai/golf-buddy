@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class CoursesComponent implements OnInit {
 
-  courses: Courses[];
+  courses: Courses;
   selectedCourse: Course;
   selected: boolean = false;
   teeType: any[];
@@ -33,14 +33,12 @@ export class CoursesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getCourses();
-    localStorage.clear();
-  }
-
-  getCourses() {
-    this.golfApiService.getCourses().subscribe(data => {
-      this.courses = data.courses;
-    })
+    this.courses = this.golfApiService.courses;
+    if(this.courses === undefined) {
+      this.getLocalStorage();
+    } else {
+      this.setLocalStorage();
+    }
   }
 
   cardSelected(id: number) {
@@ -62,13 +60,21 @@ export class CoursesComponent implements OnInit {
   }
 
   setSelected(id: number) {
-    if(this.selectedPlayer && this.selectedTeeType) {
+    if (this.selectedPlayer && this.selectedTeeType) {
       this.scoreCardService.setSelected(this.selectedPlayer, this.selectedTeeType);
+      localStorage.clear();
       this.router.navigate([`course/${id}`]);
     } else {
-
       return;
     }
+  }
+
+  setLocalStorage() {
+    localStorage.setItem('courses', JSON.stringify(this.courses));
+  }
+
+  getLocalStorage() {
+    this.courses = JSON.parse(localStorage.getItem('courses'));
   }
 }
 

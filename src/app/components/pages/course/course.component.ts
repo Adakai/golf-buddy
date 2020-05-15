@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ScoreCardService } from 'src/app/shared/services/score-card.service';
 import { ActivatedRoute } from '@angular/router';
 import { GolfApiService } from 'src/app/shared/services/golf-api.service';
+import { Courses } from 'src/app/models/courses';
 import { Course } from 'src/app/models/course';
 
 
@@ -12,6 +13,7 @@ import { Course } from 'src/app/models/course';
 })
 export class CourseComponent implements OnInit {
   id: number;
+  courses: Courses;
   currentCourse: Course;
   selectedPlayer: number;
   selectedTeeType: string;
@@ -38,6 +40,18 @@ export class CourseComponent implements OnInit {
     this.getLocalStorage();
     this.setValues();
     this.getCourse();
+    this.getCourses();
+  }
+
+  getCourses() {
+    this.golfApiService.getCourses().subscribe(data => {
+      this.courses = data.courses;
+      this.saveCurCoures();
+    })
+  }
+
+  saveCurCoures() {
+    this.golfApiService.saveCoures(this.courses);
   }
 
   setValues() {
@@ -122,7 +136,6 @@ export class CourseComponent implements OnInit {
     if (this.changedName) {
       this.playerCollection = JSON.parse(localStorage.getItem('playerCollection'));
     }
-
   }
 
   setLocalStorage() {
