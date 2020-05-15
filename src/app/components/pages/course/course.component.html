@@ -57,7 +57,7 @@
             </div>
           </div>
           <div (click)="clearField($event)" *ngFor="let hole of player.holes" class="columns">
-            <input type="text" (change)="setScoreTotal($event, player.id, hole.hole)" [value]="hole.score"/>
+            <input type="text" (change)="setScoreTotal($event, player.id, hole.hole)" [value]="hole.score" />
           </div>
           <div class="total">
             <div>{{ player.totalScore }}</div>
@@ -69,3 +69,15 @@
     </div>
   </div>
 </div>
+
+<div *ngIf="completed">
+  <div class="dialog">
+    <h1 mat-dialog-title>Congratulations you finished {{ completedPlayer.name }}</h1>
+    <div mat-dialog-content>
+      <h2>{{ completedMessage }}</h2>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-raised-button (click)="resetCompleted()" mat-button cdkFocusInitial>Ok</button>
+    </div>
+  </div>
+</div> 

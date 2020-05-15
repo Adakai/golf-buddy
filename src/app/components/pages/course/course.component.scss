@@ -234,3 +234,27 @@
     }
   }
 }
+
+.dialog {
+  @include flex-jse-ac-fdc();
+  height: 93%;
+  width: 100%;
+  background-color: #484848da;
+  border-radius: 4px;
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  h1 {
+    font-size: 50px;
+    color: #fff;
+  }
+  h2 {
+    font-size: 40px;
+    color: #fff;
+  }
+  button {
+    width: 100px;
+    height: 50px;
+    font-size: 35px;
+  }
+}

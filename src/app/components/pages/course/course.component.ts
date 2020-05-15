@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { GolfApiService } from 'src/app/shared/services/golf-api.service';
 import { Course } from 'src/app/models/course';
 
+
 @Component({
   selector: 'app-course',
   templateUrl: './course.component.html',
@@ -23,11 +24,14 @@ export class CourseComponent implements OnInit {
   totalPars: number = 0;
   totalHandicaps: number = 0;
   changedName: boolean = false;
+  completed: boolean = false;
+  completedPlayer: any;
+  completedMessage: string = '';
 
   constructor(
     private activateRoute: ActivatedRoute,
     private scoreCardService: ScoreCardService,
-    private golfApiService: GolfApiService,
+    private golfApiService: GolfApiService
   ) { }
 
   ngOnInit(): void {
@@ -78,8 +82,8 @@ export class CourseComponent implements OnInit {
     })
   };
 
-  setPlayers() {  
-    if(this.playerCollection.length === 0) {
+  setPlayers() {
+    if (this.playerCollection.length === 0) {
       for (let i = 0; i < this.selectedPlayer; i++) {
         const holes = [];
         const player = { name: '', id: 0, holes: holes, totalScore: 0, outScore: 0, inScore: 0, nameChanged: false };
@@ -115,10 +119,10 @@ export class CourseComponent implements OnInit {
       console.log(this.holes)
       this.setTeeType();
     }
-    if(this.changedName) {
+    if (this.changedName) {
       this.playerCollection = JSON.parse(localStorage.getItem('playerCollection'));
     }
-    
+
   }
 
   setLocalStorage() {
@@ -148,7 +152,43 @@ export class CourseComponent implements OnInit {
   }
 
   setScoreTotal(event: any, id: number, hole: number) {
-    console.log(id, event.target.value, hole);
+    console.log(hole)
+    this.playerCollection[id].holes[hole - 1].score = Number(event.target.value);
+    this.playerCollection[id].totalScore = 0;
+    this.playerCollection[id].outScore = 0;
+    this.playerCollection[id].inScore = 0;
+    for (let i = 0; i < this.playerCollection[id].holes.length; i++) {
+      this.playerCollection[id].totalScore += this.playerCollection[id].holes[i].score;
+    }
+    for (let i = 0; i < this.playerCollection[id].holes.length - 9; i++) {
+      this.playerCollection[id].outScore += this.playerCollection[id].holes[i].score;
+    }
+    for (let i = 9; i < this.playerCollection[id].holes.length; i++) {
+      this.playerCollection[id].inScore += this.playerCollection[id].holes[i].score;
+    }
+    if (hole == 18) {
+      this.setCompleted(this.playerCollection[id])
+    }
+    this.setLocalStorage();
+    console.log(this.playerCollection);
+  }
+
+  setCompleted(player) {
+    this.completedPlayer = player;
+    this.completed = true;
+    if (player.totalScore < this.totalPars) {
+      this.completedMessage = `Great job ${player.name}, you had ${player.totalScore - this.totalPars} under par`;
+    } else if (player.totalScore === this.totalPars) {
+      this.completedMessage = `Good job ${player.name}, you had a even score of ${player.totalScore - this.totalPars}`;
+    } else {
+      this.completedMessage = `Better luck next time ${player.name}, you had ${player.totalScore - this.totalPars} over par.`
+    }
+  }
+
+  resetCompleted() {
+    this.completedPlayer = undefined;
+    this.completed = false;
+    this.completedMessage = '';
   }
 }
 
