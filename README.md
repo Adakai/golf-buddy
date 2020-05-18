@@ -1,3 +1,9 @@
+# github pages link below
+
+## https://adakai.github.io/golf-buddy/
+
+
+
 # AngularGolfApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.0.
